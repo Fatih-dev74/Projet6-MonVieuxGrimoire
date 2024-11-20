@@ -5,14 +5,14 @@ const User = require('../Models/User');
 // SIGN UP //
 exports.signup = (req, res, next) => {
     const emailRegex = /\S+@\S+\.\S+/;
-    const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{12,}$/;
+    const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{6,}$/;
 
     if (!emailRegex.test(req.body.email)) {
         return res.status(400).json({ error: "L'e-mail est invalide !" });
     }
 
     if (!passwordRegex.test(req.body.password)) {
-        return res.status(400).json({ error: "Le mot de passe doit contenir au moins 12 caractères, une majuscule, un chiffre et un symbole." });
+        return res.status(400).json({ error: "Le mot de passe doit contenir au moins 6 caractères, une majuscule, un chiffre et un symbole." });
     }
 
     bcrypt.hash(req.body.password, 10)
